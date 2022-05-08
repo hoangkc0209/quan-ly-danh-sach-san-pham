@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>JSP Page</title>
+</head>
+<body>
+<h1>Product</h1>
+<form th:object="${product}" th:action="@{/cart/add}" method="post">
+  <label th:class="pad_top" th:color = "red" >Product Code:</label>
+  <input th:type="text" name="productCode" th:field="*{code}">
+  <span class="validationError"
+        th:if="${#fields.hasErrors('code')}"
+        th:errors="*{code}">Code error
+    </span><br>
+  <label th:class="pad_top" th:color = "red" >Product Description</label>
+  <input th:type="text" name="productDescription" th:field="*{description}">
+  <span class="validationError"
+        th:if="${#fields.hasErrors('description')}"
+        th:errors="*{description}">Code error
+    </span><br>
+  <label th:class="pad_top" th:color = "red" >Product Price</label>
+  <input th:type="text" name="productPrice" th:field="*{price}">
+  <span class="validationError"
+        th:if="${#fields.hasErrors('price')}"
+        th:errors="*{price}">Code error
+    </span><br>
+
+  <label>&nbsp;</label>
+  <input th:type="submit" value="Add Product" th:class="margin_left">
+
+</form>
+
+<form th:action="@{/cart}" >
+  <input type="submit" value="View Product">
+</form>
+</body>
+</html>

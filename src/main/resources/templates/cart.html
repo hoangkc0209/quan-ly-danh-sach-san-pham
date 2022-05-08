@@ -1,0 +1,44 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Murach's Java Servlets and JSP</title>
+</head>
+<body>
+<h1>Your cart</h1>
+<table th:border="1" th:cellpadding="5">
+    <tr>
+        <th>Code</th>
+        <th>Description</th>
+        <th>Price</th>
+    </tr>
+<!--    <c:forEach var="product" items="${products}">-->
+    <th:block th:each="product: ${cart.listProduct}">
+        <tr th:valign="top">
+            <td th:text="${product.code}" ></td>
+            <td th:text="${product.description}" ></td>
+            <td th:text="${product.priceCurrencyFormat}" ></td>
+            <td>
+                <form th:action="@{/cart/editProduct}">
+                    <input type="hidden" name="productId"
+                           th:value="${product.id}">
+                    <input type="submit" value="Edit">
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/cart/deleteProduct}">
+                    <input type="hidden" name="productCode"
+                           th:value="${product.code}">
+                    <input type="submit" value="Delete">
+                </form>
+            </td>
+        </tr>
+    </th:block>
+<!--    </c:forEach>-->
+</table>
+<br>
+<form th:action="@{/cart/addProduct}" >
+    <input type="submit" value="Add Product">
+</form>
+</body>
+</html>
